@@ -11,23 +11,29 @@ The given file function is doing following tasks, in module 2.
 1. First selection of frames for annotation (Implemented in AnnotationFrameSelector.Py explained below)
 2. Opens annotating tool to capture 2D positions
 3. 2D positions from different images are triangulated and 3D positions w.r.t corresponding 6-DOF pattern  are saved in separate file.
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 4. annotationFrameSelector: The file allows for selection of frames for annotation based on projection of the markers on the image.
 The projections are VICON markers transferred to image space from 3D space.
 Using the rotation and translation data provided by the tracker software.
 The image projection indicate accuracy of the marker tracking.
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 5. automaticAnnotationTool: The automatic annotation tool works in following way. It takes custom 3D feature information of given 6DOF VICON objects
 (i.e. marker position of marker patterns and virtual features prepared through annotation protocol) and projects them on the image.
 The final projected points are stored in the .csv file to create a database for the image annotations.
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 6. createFeaturesUsingAnnotation: This file shows an example of using the custom 2D annotations and triangulating them to create 3D annotations on images. A separate version purely for annotation of bird 3D posture is now pulished with https://doi.org/10.48550/arXiv.2303.13174 at https://github.com/alexhang212/dataset-3dpop. 
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 7. customCameraProjection: The file is created to show an example of adding custom camera to the module, the example shows how new cameras can be added to the existing workflow and used for projecting 3D information on the image space. [not tested 100%] 
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 8. exampleNexusProjectionToImage: 
 Example code: Data visualization on images directly using output of vicon nexus. 
 The example shows the method to read data directly from the Nexus output (3D points in vicon space) and project them directly on the image space.
+Example data: 20190620_PigeonPostureDataset4\settings_session07.xml (provided with sample data)
 
 9. imageProjectionExample: [Deprecated]
 
@@ -42,11 +48,13 @@ The file can be used to print the stream from remote computer using the VICON sy
 The script provides and example on how to use the stream and extract data.
 The advantage is that the computer does not need to have vicon datastream wrapper installed.
 Note: The computer has to be connected to the live system via VPN i.e. both computers must be on the same network follow documentation on VICON Datastream SDK for latest information
+Input file: Path to \\ViconDataStreamSDK_CPPTest, usually stored in program files depending on x64 or x32 installation.  
+Input : IP information of the computer with live VICON connection. 
 
 12. viconDataStreamReader: 
 Example code: Closed loop applications [ Requires active connection with VICON over network or their simulator ]
 The file is supposed to read the information coming from the vicon software through their customized datastream SDK. According to the website the it is supported for windows OS. The vicon package must be installed. Follow documentation on VICON Datastream SDK for latest information
-
+Input : IP information of the computer with live VICON connection. 
 
 Overview of the coded : 
 The code has following modules: 
