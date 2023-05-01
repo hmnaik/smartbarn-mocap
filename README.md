@@ -3,13 +3,12 @@ The repo is deisgned to use the 3D tracking data of mocap system.
 
 The given file function is doing following tasks, in module 2.  
 
-1. accessPhoneCam : The code in this file allows us to stream the camera footage from the phone connected to the same WLAN network with the computer.
+1. accessPhoneCam : The code in this file allows us to stream the camera footage from the phone connected to the same WLAN network with the computer. Requires users to have active connection with VICON system and in the same network.  
 
-2. acousticVICONCalibration Projecting mocap information on the video images.
+2. acousticVICONCalibration: Computers the rotation and translation between the VICON coordinate system and the acoustic coordinate system. This can be considered as a pose of acoustic sensors w.r.t vicon just like other bodies that are tracked. 
 
-3. annotateSequence: The file is created to start your own annotation sequence for computing 3D position of custom features.
-The code follows following 3 steps.
-1. First selection of frames for annotation (Implemented in AnnotationFrameSelector.Py)
+3. annotateSequence: The file is created to start your own annotation sequence for computing 3D position of custom features. The code follows following 3 steps.
+1. First selection of frames for annotation (Implemented in AnnotationFrameSelector.Py explained below)
 2. Opens annotating tool to capture 2D positions
 3. 2D positions from different images are triangulated and 3D positions w.r.t corresponding 6-DOF pattern  are saved in separate file.
 
@@ -22,13 +21,12 @@ The image projection indicate accuracy of the marker tracking.
 (i.e. marker position of marker patterns and virtual features prepared through annotation protocol) and projects them on the image.
 The final projected points are stored in the .csv file to create a database for the image annotations.
 
-6. createFeaturesUsingAnnotation: This file shows an example of using the custom 2D annotations and triangulating them to create 3D annotations.
+6. createFeaturesUsingAnnotation: This file shows an example of using the custom 2D annotations and triangulating them to create 3D annotations on images. A separate version purely for annotation of bird 3D posture is now pulished with https://doi.org/10.48550/arXiv.2303.13174 at https://github.com/alexhang212/dataset-3dpop. 
 
-7. customCameraProjection: [not tested 100%] The file is created to show an example of adding custom camera to the module, the example shows how new cameras can be added to the existing workflow and used for projecting 3D information
-on the image space.
+7. customCameraProjection: The file is created to show an example of adding custom camera to the module, the example shows how new cameras can be added to the existing workflow and used for projecting 3D information on the image space. [not tested 100%] 
 
 8. exampleNexusProjectionToImage: 
-Example code: Data visualization
+Example code: Data visualization on images directly using output of vicon nexus. 
 The example shows the method to read data directly from the Nexus output (3D points in vicon space) and project them directly on the image space.
 
 9. imageProjectionExample: [Deprecated]
@@ -39,18 +37,18 @@ The file is designed show an example of how to read the vicon datastream and com
 Use case : The script is useful to learn how to computer pose of pattern from marker positions and error. A valid comparioson with vicon pose is possible. If the object is defined well it should result in similar results both in vicon and custom pose compuration. Vicon does do some additional tricks and optimizations that we do not know and pose may differ. However, on good datasets it should not differ a lot.
 
 11. rwStreamOverNetwork: 
-Example code: Closed-loop applications
+Example code: Closed-loop applications [ Requires active connection with VICON over network or their simulator ]
 The file can be used to print the stream from remote computer using the VICON system.
 The script provides and example on how to use the stream and extract data.
 The advantage is that the computer does not need to have vicon datastream wrapper installed.
 Note: The computer has to be connected to the live system via VPN i.e. both computers must be on the same network follow documentation on VICON Datastream SDK for latest information
 
 12. viconDataStreamReader: 
-Example code: Closed loop applications
-The file is supposed to read the information coming from the vicon software through the datastream SDK. According to the website the it is supported for windows OS. The vicon package must be installed. Follow documentation on VICON Datastream SDK for latest information
+Example code: Closed loop applications [ Requires active connection with VICON over network or their simulator ]
+The file is supposed to read the information coming from the vicon software through their customized datastream SDK. According to the website the it is supported for windows OS. The vicon package must be installed. Follow documentation on VICON Datastream SDK for latest information
 
 
-Code overview: 
+Overview of the coded : 
 The code has following modules: 
 1. VICON Data: Documentations for the SDK provided by vicon. 
 2. VICON Application Examples: Each file is example of a specific task, each of these tasks are designed in a way that user learns to use the helper functions developed to access and process VICON data. Each file has comments in the beginning to explain the task. 
